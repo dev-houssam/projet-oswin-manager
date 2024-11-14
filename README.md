@@ -1,17 +1,19 @@
-# winmanager
+Voici la traduction en français du fichier README, avec le nom du projet et l'auteur indiqués :
 
+# WinProject
 
+Auteur : Houssam BACAR
 
-## Getting started
+## Pour commencer
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+Pour vous faciliter le démarrage avec GitLab, voici une liste des prochaines étapes recommandées.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Déjà un pro ? Modifiez simplement ce fichier README.md et faites-le vôtre. Vous voulez que ce soit facile ? [Utilisez le modèle en bas de page](#modifier-ce-readme) !
 
-## Add your files
+## Ajoutez vos fichiers
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+- [ ] [Créez](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) ou [téléchargez](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) des fichiers
+- [ ] [Ajoutez des fichiers en utilisant la ligne de commande](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) ou poussez un dépôt Git existant avec la commande suivante :
 
 ```
 cd existing_repo
@@ -20,74 +22,74 @@ git branch -M main
 git push -uf origin main
 ```
 
-## Integrate with your tools
+## Intégrez avec vos outils
 
-- [ ] [Set up project integrations](https://gitlab.com/hbacar/winmanager/-/settings/integrations)
+- [ ] [Configurez les intégrations du projet](https://gitlab.com/hbacar/winmanager/-/settings/integrations)
 
-## Collaborate with your team
+## Collaborez avec votre équipe
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+- [ ] [Invitez des membres de l'équipe et des collaborateurs](https://docs.gitlab.com/ee/user/project/members/)
+- [ ] [Créez une nouvelle demande de fusion](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
+- [ ] [Fermez automatiquement les problèmes à partir des demandes de fusion](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
+- [ ] [Activez les approbations de demandes de fusion](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
+- [ ] [Configurez la fusion automatique](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
 
-## Test and Deploy
+## Testez et déployez
 
-Use the built-in continuous integration in GitLab.
+Utilisez l'intégration continue intégrée à GitLab.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+- [ ] [Commencez avec GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
+- [ ] [Analysez votre code pour détecter les vulnérabilités connues avec le test de sécurité d'application statique (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
+- [ ] [Déployez sur Kubernetes, Amazon EC2 ou Amazon ECS en utilisant Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
+- [ ] [Utilisez des déploiements basés sur le pull pour une meilleure gestion de Kubernetes](https://docs.gitlab.com/ee/user/clusters/agent/)
+- [ ] [Configurez des environnements protégés](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
 
 ***
 
-# Editing this README
+# Modifier ce README
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Lorsque vous serez prêt à personnaliser ce README, modifiez simplement ce fichier et utilisez le modèle pratique ci-dessous (ou structurez-le comme vous le souhaitez - ce n'est qu'un point de départ !). Merci à [makeareadme.com](https://www.makeareadme.com/) pour ce modèle.
 
-## Suggestions for a good README
+## Suggestions pour un bon README
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Chaque projet est différent, alors réfléchissez à quelles sections s'appliquent au vôtre. Les sections utilisées dans le modèle sont des suggestions pour la plupart des projets open source. Gardez également à l'esprit que même si un README peut être trop long et détaillé, trop long vaut mieux que trop court. Si vous pensez que votre README est trop long, envisagez d'utiliser une autre forme de documentation plutôt que de supprimer des informations.
 
-## Name
-Choose a self-explaining name for your project.
+## Nom
+Choisissez un nom explicite pour votre projet.
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+Indiquez ce que votre projet peut faire spécifiquement. Fournissez du contexte et ajoutez un lien vers toute référence que les visiteurs pourraient ne pas connaître. Une liste de fonctionnalités ou une sous-section de contexte peut également être ajoutée ici. S'il existe des alternatives à votre projet, c'est un bon endroit pour énumérer les facteurs de différenciation.
 
 ## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Sur certains README, vous pouvez voir de petites images qui transmettent des métadonnées, comme si tous les tests passent ou non pour le projet. Vous pouvez utiliser Shields pour en ajouter à votre README. De nombreux services fournissent également des instructions pour ajouter un badge.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## Visuels
+Selon ce que vous faites, il peut être une bonne idée d'inclure des captures d'écran ou même une vidéo (vous verrez souvent des GIF plutôt que de vraies vidéos). Des outils comme ttygif peuvent aider, mais consultez Asciinema pour une méthode plus sophistiquée.
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Dans un écosystème particulier, il peut y avoir une façon courante d'installer les choses, comme utiliser Yarn, NuGet ou Homebrew. Cependant, envisagez la possibilité que la personne qui lit votre README soit novice et souhaite plus d'orientation. Énumérer des étapes spécifiques aide à éliminer l'ambiguïté et permet aux gens d'utiliser votre projet aussi rapidement que possible. S'il ne fonctionne que dans un contexte spécifique comme une version particulière de langage de programmation ou un système d'exploitation ou a des dépendances qui doivent être installées manuellement, ajoutez également une sous-section Prérequis.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+## Utilisation
+Utilisez des exemples libéralement et montrez la sortie attendue si vous le pouvez. Il est utile d'avoir en ligne le plus petit exemple d'utilisation que vous pouvez démontrer, tout en fournissant des liens vers des exemples plus sophistiqués s'ils sont trop longs pour être raisonnablement inclus dans le README.
 
 ## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Indiquez aux gens où ils peuvent obtenir de l'aide. Cela peut être n'importe quelle combinaison d'un système de suivi des problèmes, une salle de chat, une adresse e-mail, etc.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Feuille de route
+Si vous avez des idées pour les versions futures, il est bon de les énumérer dans le README.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+## Contribution
+Indiquez si vous êtes ouvert aux contributions et quelles sont vos exigences pour les accepter.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Pour les personnes qui souhaitent apporter des modifications à votre projet, il est utile d'avoir une documentation sur la façon de commencer. Peut-être y a-t-il un script qu'ils devraient exécuter ou des variables d'environnement qu'ils doivent définir. Rendez ces étapes explicites. Ces instructions pourraient également être utiles pour votre futur moi.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Vous pouvez également documenter les commandes pour linter le code ou exécuter des tests. Ces étapes aident à assurer une haute qualité du code et réduisent la probabilité que les changements brisent accidentellement quelque chose. Avoir des instructions pour exécuter des tests est particulièrement utile si cela nécessite une configuration externe, comme démarrer un serveur Selenium pour tester dans un navigateur.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+## Auteurs et remerciements
+Montrez votre appréciation à ceux qui ont contribué au projet.
 
-## License
-For open source projects, say how it is licensed.
+## Licence
+Pour les projets open source, indiquez comment il est licencié.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## État du projet
+Si vous avez manqué d'énergie ou de temps pour votre projet, mettez une note en haut du README indiquant que le développement a ralenti ou s'est complètement arrêté. Quelqu'un pourrait choisir de forker votre projet ou se porter volontaire pour intervenir en tant que mainteneur ou propriétaire, permettant à votre projet de continuer. Vous pouvez également faire une demande explicite de mainteneurs.
