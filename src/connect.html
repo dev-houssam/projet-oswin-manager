@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fenêtre de Connexion</title>
+  <!--<link rel="stylesheet" href="style.css">-->
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-box">
+      <h1>Connexion</h1>
+      <form>
+        <div class="input-group">
+          <label for="username">Nom d'utilisateur</label>
+          <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur">
+        </div>
+        <div class="input-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" id="password" placeholder="••••••••">
+        </div>
+        <button type="submit" class="btn-primary">Se connecter</button>
+        <p class="footer-text">Mot de passe oublié ? <a href="index.html?token=azerty12-3456&user=houssam">Réinitialiser</a></p>
+      </form>
+    </div>
+  </div>
+
+  <style>
+        /* Général */
+        * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+
+        body {
+        font-family: 'Ubuntu', sans-serif; /* Inspiré de Linux */
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        color: #f0f0f0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        }
+
+        /* Conteneur principal */
+        .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 20px;
+        }
+
+        /* Boîte de connexion */
+        .login-box {
+        background: #2c2c54;
+        border-radius: 10px;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        padding: 30px;
+        width: 350px;
+        text-align: center;
+        }
+
+        .login-box h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #ffffff;
+        border-bottom: 2px solid #00bcd4;
+        display: inline-block;
+        padding-bottom: 5px;
+        }
+
+        /* Groupes d'entrée */
+        .input-group {
+        margin-bottom: 15px;
+        text-align: left;
+        }
+
+        .input-group label {
+        font-size: 14px;
+        color: #b0bec5;
+        margin-bottom: 5px;
+        display: block;
+        }
+
+        .input-group input {
+        width: 100%;
+        padding: 10px;
+        background: #1e272e;
+        border: 1px solid #4b6584;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #ffffff;
+        outline: none;
+        transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+        border-color: #00bcd4;
+        }
+
+        /* Bouton principal */
+        .btn-primary {
+        background: #00bcd4;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        }
+
+        .btn-primary:hover {
+        background: #008c9e;
+        }
+
+        /* Texte du pied de formulaire */
+        .footer-text {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #b0bec5;
+        }
+
+        .footer-text a {
+        color: #00bcd4;
+        text-decoration: none;
+        }
+
+        .footer-text a:hover {
+        text-decoration: underline;
+        }
+
+  </style>
+
+</body>
+</html>
