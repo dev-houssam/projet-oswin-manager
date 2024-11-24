@@ -78,8 +78,8 @@ function openInstallAppForm() {
 
     }
 }
-/*  
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yaNOSjm6TDs?si=xQZc-sQ7FRi4-ExR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+/*  Un contenu qu'on peut tester : vous allez voir il vaut mieux modifier ses propriétés
+<iframe width="560" height="315" src="https://www.youtube.com/embed/lol-m195s?si=xQZc-sijFR74-ExR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 */
 
 function toggleStartMenu() {
