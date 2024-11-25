@@ -4,11 +4,9 @@ const ProgTerminalLinux = `
 <div style="width: 100%; height: 100%; background-color: #2E3440; font-family: 'Menlo', 'Monaco', 'Courier New', monospace; display: flex; flex-direction: column; overflow: hidden; border-radius: 6px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);">
     <div style="background-color: #3B4252; padding: 8px; display: flex; justify-content: space-between; align-items: center;">
         <div style="display: flex; align-items: center;">
-            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #BF616A; margin-right: 8px;"></div>
-            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #EBCB8B; margin-right: 8px;"></div>
-            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #A3BE8C;"></div>
+            
         </div>
-        <span style="font-size: 14px; color: #E5E9F0;">Houssam's Terminal</span>
+        <span style="font-size: 14px; color: #E5E9F0;"></span>
         <div style="width: 60px;"></div>
     </div>
     <div style="flex-grow: 1; padding: 10px; overflow-y: auto; color: #E5E9F0;">
@@ -17,7 +15,7 @@ const ProgTerminalLinux = `
             <span style="font-weight: bold; color: #88C0D0;">Welcome to Houssam's Linux!</span>
         </div>
         <div style="margin-bottom: 5px;">
-            <span style="color: #A3BE8C;">[user@archlinux</span> <span style="color: #81A1C1;">~</span><span style="color: #A3BE8C;">]$</span> neofetch
+            <span style="color: #A3BE8C;">[houss@mlinux</span> <span style="color: #81A1C1;">~</span><span style="color: #A3BE8C;">]$</span> neofetch
         </div>
         <pre style="color: #8FBCBB; margin: 0;">
          .
@@ -29,7 +27,7 @@ const ProgTerminalLinux = `
   // _.~   ~._^  \\
   //.^         ^.\\
 </pre>
-        <div style="margin-top: 10px;border:none;" id="zoneedit" contenteditable="true" onclick="termin()"><span style="color: #A3BE8C;user-select:none;">[user@archlinux</span> <span style="color: #81A1C1;">~</span><span style="color: #A3BE8C;">]$</span> <span class="cursor" style="background-color: #E0E950; animation: blink 10s infinite;"></span>
+        <div style="margin-top: 10px;border:none;" id="zoneedit" contenteditable="true" onclick="termin()"><span style="color: #A3BE8C;user-select:none;">[houss@mlinux</span> <span style="color: #81A1C1;">~</span><span style="color: #A3BE8C;">]$</span> <span class="cursor" style="background-color: #E0E950; animation: blink 10s infinite;"></span>
         </div>
         
     </div>
@@ -62,7 +60,7 @@ const ProgTerminalLinux = `
 </div>
 `;
 
-function termin(){
+function termin(numThread=0){
 	const zoneEdit = document.getElementById('zoneedit');
 
 	zoneEdit.addEventListener('input', function() {

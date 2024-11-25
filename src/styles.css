@@ -27,6 +27,9 @@ body {
     display: flex;
     flex-direction: column;
 	    transition: transform 0.8s ease-in-out, opacity 0.9s ease-in-out;
+    max-width: 100%; /* La largeur de la fenêtre ne peut pas dépasser 100% */
+    max-height: 100%; /* La hauteur de la fenêtre ne peut pas dépasser 100% */
+    overflow: hidden; /* Empêche le contenu de dépasser */
 }
 
 .window-titlebar {
@@ -36,6 +39,8 @@ body {
     display: flex;
     justify-content: space-between;
     cursor: move;
+    position: relative;
+    top: 50;
 }
 
 .window-controls {
@@ -54,6 +59,9 @@ body {
     padding-bottom: 0px;
     padding-left: 0px;
     flex-grow: 1;
+    overflow: auto; /* Empêche le débordement du contenu */
+    word-wrap: break-word; /* Assure que le texte trop long passe à la ligne */
+    max-height: calc(100% - 40px); /* Limite la hauteur de la zone de contenu */
 }
 /*
 #taskbar {
@@ -108,6 +116,7 @@ body {
     margin:2%;
     margin-right: 10px;
     cursor: pointer;
+
     
 }
 
@@ -144,6 +153,7 @@ body {
 
   .app {
     background-color: rgba(255,255,255,0.1);
+
   }
   
   .app:hover {
@@ -256,7 +266,7 @@ body {
     position: absolute;
     bottom: 60px; /* Juste au-dessus de la barre des tâches */
     left: 10px;
-    width: 300px;
+    width: 100%;
     /*background: white;*/
     background: url('photo-1451.png') center/cover;
 
@@ -332,9 +342,14 @@ body {
 /* Contenu central */
 .start-menu-content {
     background: #000000;
-    width: 90%;
-    max-width: 1200px;
-    height: 90%;
+    width: 96%;
+    padding:0;
+    margin:0;
+    position: absolute;
+    top:0;
+    left: 0;
+    
+    height: 100%;
     border-radius: 10px;
     overflow: hidden;
     display: flex;
@@ -377,6 +392,8 @@ body {
     overflow: hidden;
     height: 50%;
     
+    margin: 0.5px;
+    
   }
 
 .start-menu-app:hover {
@@ -394,7 +411,15 @@ body {
     font-size: 1rem;
     color: #fff;
     height: 50%;
+
 }
+
+/*Les icones du menu demarage*/
+div.start-menu-app.menu-item.app{
+    width: 85%;
+}
+
+
 
 /* Animation d'apparition */
 @keyframes fadeIn {
@@ -534,6 +559,7 @@ body {
     font-size: 18px;
     color: white;
     cursor:pointer;
+    
   }
 
   .app:hover .icon {
@@ -545,3 +571,7 @@ body {
     justify-content: flex-end;
     width: auto;
   }
+
+  div#start-menu{
+    width: 100%;
+}

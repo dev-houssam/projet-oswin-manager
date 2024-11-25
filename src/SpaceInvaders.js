@@ -10,12 +10,16 @@ const ProgramSpaceInvaders = `
         <div style="width: 60px;"></div>
     </div>
     <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center; position: relative; background-color: #000;">
-        <div style="position: absolute; bottom: 20px; width: 50px; height: 30px; background-color: #0f0; animation: move-cannon 4s infinite alternate;">
+        <div style="position: absolute; top: 250px; width: 50px; height: 30px; background-color: #0f0; animation: move-cannon 4s infinite alternate;">
         </div>
+                <div style="position: absolute; top: 220px; width: 5px; height: 5px; background-color: #000; animation: move-bullet 1s infinite alternate;">
+                </div>
+                <div style="position: absolute; top: 200px; width: 10px; height: 10px; background-color: #000; animation: move-bullet 1s infinite alternate;">
+                </div>
         <div style="display: flex; justify-content: space-around; width: 100%; position: absolute; top: 50px; animation: move-invaders 2s infinite alternate;">
-            <div style="width: 40px; height: 40px; background-color: #fff; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>
-            <div style="width: 40px; height: 40px; background-color: #fff; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>
-            <div style="width: 40px; height: 40px; background-color: #fff; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>
+            <div style="width: 40px; height: 40px; background-color: #f00; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>
+            <div style="width: 40px; height: 40px; background-color: #2f9; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>
+            <div style="width: 40px; height: 40px; background-color: #00f; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>
         </div>
     </div>
     <div style="background-color: #333; padding: 10px; text-align: center; font-size: 14px;">
@@ -29,6 +33,12 @@ const ProgramSpaceInvaders = `
         @keyframes move-invaders {
             0% { transform: translateX(-20px); }
             100% { transform: translateX(20px); }
+        }
+        @keyframes move-bullet {
+            0% { transform: translateY(-70px); }
+            25%{transform: translateX(0px);}
+            75%{transform: translateX(5px);}
+            100% { transform: translateY(30px); }
         }
     </style>
 

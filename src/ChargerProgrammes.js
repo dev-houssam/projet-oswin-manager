@@ -20,7 +20,7 @@ const scripts = [
 // Charger chaque script de la liste
 scripts.forEach(script => {
     chargerScript(script, () => {
-        env.addUtility(script, '', ()=>{});
+        env.addUtility(script, '', (arg=0)=>{});
         console.log(`${script} chargé avec succès.`);
     });
 });

@@ -2,6 +2,7 @@ const windowManager = new WindowManager();
 
 // Exemple d'application avec un contenu JavaScript isolé via une closure
 let installedApps = [];
+
 //Old content
 /*
 

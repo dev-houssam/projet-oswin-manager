@@ -2,22 +2,23 @@
 {
 
 const ProgramT2 = `
-<div id="terminal" class="bg-gray-900 text-gray-300 p-4 h-full font-mono">
+<div id="thread_terminal" class="bg-gray-900 text-gray-300 p-4 h-full font-mono">
   <div class="output space-y-1"></div>
   <div class="flex items-center">
     <span class="text-green-500">user@system</span>
     <span class="text-blue-400">:~$</span>
     <input
       type="text"
-      class="ml-2 bg-transparent outline-none flex-1"
+      class="ml-2 bg-transparent outline-none flex-1" style="border: solid 0 transparent;position: relative; top: -19px; left: -3px;"
     />
   </div>
 </div>
 `;
 
-function terminal2Code() {
+function terminal2Code(numThreads=0) {
     // Sélection des éléments du DOM
-    const terminal = document.querySelector('#terminal');
+    //alert(numThreads);
+    const terminal = document.querySelector('#'+numThreads+'-terminal');
     const outputDiv = terminal.querySelector('.output');
     const inputElement = terminal.querySelector('input');
   
@@ -29,7 +30,7 @@ function terminal2Code() {
     function updateDisplay() {
       outputDiv.innerHTML = lines.map(line => '<div>'+line+'</div>').join('') +
         `<div>
-          <span class="prompt">user@system:~$</span>
+          <span class="prompt">.......................~$</span>
           <span class="current-command">${currentCommand}</span>
         </div>`;
     }
@@ -50,7 +51,6 @@ function terminal2Code() {
         updateDisplay();
       }
     });
-    alert("cool");
   
     // Affichage initial
     updateDisplay();

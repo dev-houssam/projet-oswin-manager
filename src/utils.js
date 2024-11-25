@@ -22,22 +22,24 @@ function updateAppList() {
             <span class="start-menu-app-name">${app.name}</span>
         `;
         appItem.onclick = () => {
-            openWindow(app.name, app.content); // Ouvrir la fenêtre avec le contenu spécifique
+            const newId = Thread.getNextId();
+            const mutedString = app.content.replace(`thread_`, `${newId}-`);
+            openWindow(app.name, mutedString, app.x, app.y, app.width, app.height); // Ouvrir la fenêtre avec le contenu spécifique
             toggleStartMenu(); // Fermer le menu
 
             //On attend hoooooooooo..... et on execute yessss
             //On peut meme lancer une notification pour ce lancement impecable
             //Apres 100 ms de stresse binaire !
-            setTimeout((app)=>{
+            setTimeout((app, newId)=>{
                 //Execution :: 0
                 env.getFunctionNames(app.name).forEach(funcName => {
                     //console.log(app.name + " = "+ funcName);
                     console.log(funcName);
-                    console.log(env.executeUtility(app.name, funcName));
+                    console.log(env.executeUtility(app.name, funcName, newId));
                     //if(funcName !== '')
                     // env.executeUtility(app.name, funcName);
                 });
-            }, 100, app);
+            }, 100, app, newId);
         };
         
         
@@ -78,8 +80,8 @@ function openInstallAppForm() {
 
     }
 }
-/*  Un contenu qu'on peut tester : vous allez voir il vaut mieux modifier ses propriétés
-<iframe width="560" height="315" src="https://www.youtube.com/embed/lol-m195s?si=xQZc-sijFR74-ExR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+/*  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/yaNOSjm6TDs?si=xQZc-sQ7FRi4-ExR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 */
 
 function toggleStartMenu() {

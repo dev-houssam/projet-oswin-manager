@@ -1,5 +1,5 @@
 const ProgramNautilus = `
-<body style="margin: 0; padding: 0; font-family: Ubuntu, Arial, sans-serif; display: flex; flex-direction: column; height: 100vh; background-color: #f6f6f6;">
+<body style="margin: 0; padding: 0; font-family: Ubuntu, Arial, sans-serif; display: flex; flex-direction: column; height: auto 100%; background-color: #f6f6f6;">
     <div style="background-color: #3c3b37; color: white; padding: 5px 10px;">
         <span style="font-size: 14px;">Fichiers</span>
     </div>
@@ -50,7 +50,7 @@ const ProgramNautilus = `
             </div>
         </div>
     </div>
-    <div style="background-color: #f3f3f3; border-top: 1px solid #d7d7d7; padding: 5px 10px; display: flex; justify-content: space-between; align-items: center;">
+    <div style="position:absolute;bottom:0;width: 100%;background-color: #f3f3f3; border-top: 1px solid #d7d7d7; padding: 0px 0px; display: flex; justify-content: space-between; align-items: center;">
         <span style="font-size: 12px;">3 éléments</span>
         <span style="font-size: 12px;">Espace libre : 50 Go</span>
     </div>
