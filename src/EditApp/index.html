@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éditeur de Code HTML/JS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="editor">Éditeur</button>
+            <button class="tab-btn" data-tab="programs">Mes Programmes</button>
+        </div>
+        
+        <div class="tab-content active" id="editor">
+            <div class="editor-container">
+                <div class="editor html-css">
+                    <h3>HTML/CSS</h3>
+                    <textarea id="htmlCssEditor"></textarea>
+                </div>
+                <div class="editor js">
+                    <h3>JavaScript</h3>
+                    <textarea id="jsEditor"></textarea>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="runBtn">Exécuter</button>
+                <button id="saveBtn">Sauvegarder</button>
+            </div>
+            <div class="output">
+                <h3>Résultat</h3>
+                <iframe id="outputFrame"></iframe>
+            </div>
+        </div>
+        
+        <div class="tab-content" id="programs">
+            <h2>Mes Programmes</h2>
+            <ul id="programList"></ul>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Devine ÇA!</title>
+  <style>
+    /* Styles CSS ici */
+	body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background: linear-gradient(to bottom, #007eb3, #ff758c);
+  color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#game-container {
+  background: #000fff33;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #ffed66;
+  text-shadow: 2px 2px #ff6580;
+}
+
+#number-display {
+  font-size: 5rem;
+  margin: 20px 0;
+  color: #ffffff;
+  background: #ff6580;
+  padding: 10px 20px;
+  border-radius: 8px;
+}
+
+#guess-input {
+  padding: 10px;
+  font-size: 1.5rem;
+  margin-right: 10px;
+}
+
+#guess-button {
+  padding: 10px 20px;
+  font-size: 1.5rem;
+  background: #ff6580;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#feedback {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+#timer, #tries-remaining {
+  font-size: 1.5rem;
+}
+
+
+
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <h1>Devine ÇA!</h1>
+    <p id="instruction">Devinez le nombre avant que le temps ne s'écoule !</p>
+    <div id="number-display">---</div>
+    <input type="number" id="guess-input" placeholder="Entrez un nombre">
+    <button id="guess-button">Entrer</button>
+    <p id="feedback"></p>
+    <p id="tries-remaining">Essais restants : <span id="tries">3</span></p>
+    <p id="timer">Temps restant : <span id="time">10</span>s</p>
+  </div>
+  <audio id="game-music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  <script>
+    // Script JS ici
+function devineCa(){
+	const display = document.getElementById("number-display");
+const input = document.getElementById("guess-input");
+const button = document.getElementById("guess-button");
+const feedback = document.getElementById("feedback");
+const triesRemaining = document.getElementById("tries");
+const timer = document.getElementById("time");
+const music = document.getElementById("game-music");
+
+let randomNumber = Math.floor(Math.random() * 100) + 1;
+let currentNumber = 0;
+let attempts = 5;
+let timeLeft = 10;
+let interval;
+let gameRunning = false;
+
+// Start game music
+music.volume = 0.3;
+music.play();
+
+function startGame() {
+  feedback.textContent = "";
+  input.value = "";
+  attempts = 5;
+  timeLeft = 30;
+  triesRemaining.textContent = attempts;
+  timer.textContent = timeLeft;
+
+  interval = setInterval(() => {
+    currentNumber = Math.floor(Math.random() * 100) + 1;
+    display.textContent = currentNumber;
+  }, 100);
+
+  const countdown = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--;
+      timer.textContent = timeLeft;
+    } else {
+      clearInterval(countdown);
+      clearInterval(interval);
+      endGame("Perdu ! Le nombre était " + randomNumber);
+    }
+  }, 1000);
+
+  gameRunning = true;
+}
+
+function checkGuess() {
+  if (!gameRunning) return;
+
+  const guess = parseInt(input.value, 10);
+  if (isNaN(guess)) {
+    feedback.textContent = "Veuillez entrer un nombre valide !";
+    return;
+  }
+
+  if (guess === randomNumber) {
+    clearInterval(interval);
+    endGame("Bravo ! Vous avez deviné !");
+    return;
+  }
+
+  attempts--;
+  triesRemaining.textContent = attempts;
+  feedback.textContent = guess > randomNumber ? "Trop grand !" : "Trop petit !";
+
+  if (attempts === 0) {
+    clearInterval(interval);
+    endGame("Perdu ! Le nombre était " + randomNumber);
+  }
+}
+
+function endGame(message) {
+  feedback.textContent = message;
+  gameRunning = false;
+  display.textContent = "ECHEC !";
+  input.value = "";
+  music.pause();
+  music.currentTime = 0;
+}
+
+button.addEventListener("click", checkGuess);
+window.onload = startGame;
+}
+
+devineCa();
+
+  </script>
+</body>
+</html>
+

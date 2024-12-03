@@ -1,0 +1,84 @@
+### Utilisateur
+GET http://localhost:3000/users
+
+### requete de connexion : 
+POST http://localhost:3000/users/login/
+
+
+
+### 1. Inscription d'un utilisateur
+
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "username": "sohnjoe",
+  "email": "joffdoe@example.com",
+  "password": "password123"
+}
+
+### Connexion de l'utilisateur
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+  "email": "joffdoe@example.com",
+  "password": "password123"
+}
+
+### 3. Accéder au profil utilisateur (route protégée)
+
+GET http://localhost:3000/users/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIyLCJpYXQiOjE3MzMwMDUzNDQsImV4cCI6MTczMzAwODk0NH0.xsvi_VGUkZzIHl-gDtvGGF_Tan27ylRKQ2wDZdkfcHw
+
+
+### 4. Ajouter un autre utilisateur
+
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "username": "janidoe",
+  "email": "janidoe@example.com",
+  "password": "password456"
+}
+
+### 5. Tester une route protégée sans token
+
+GET http://localhost:3000/users/profile
+
+### Attendu : une réponse avec un code 401 Unauthorized 
+### et un message indiquant que le token est manquant.
+
+### 6. Tester une route protégée avec un token invalide
+
+GET http://localhost:3000/users/profile
+Authorization: Bearer INVALID_TOKEN
+
+### Attendu : une réponse avec un code 403 Forbidden 
+### et un message indiquant que le token est invalide.
+
+### 7. Vérifier la liste des utilisateurs (route à créer si besoin)
+
+GET http://localhost:3000/users
+Authorization: Bearer <TOKEN>
+
+
+### Ajouter un programme
+POST http://localhost:3000/apps
+Authorization: Bearer <TOKEN>
+Content-Type: application/json
+
+{
+  "name": "Nautilus",
+  "icon": "&#xf07b;",
+  "content": "<html>Contenu spécifique pour Nautilus.</html>",
+  "description": "Explorateur de fichiers.",
+  "category": "Utilitaire"
+}
+
+### programs d'utilisateur en particulier
+
+http://localhost:3000/apps/progs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIyLCJpYXQiOjE3MzMwMjExOTksImV4cCI6MTczMzAyNDc5OX0.ExHH6PQbDIJrPC2VGo4F2K7LXCZRdBn7bV-zn8LHcEU

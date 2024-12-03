@@ -1,0 +1,541 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.13 (Ubuntu 14.13-0ubuntu0.22.04.1)
+-- Dumped by pg_dump version 17.2 (Ubuntu 17.2-1.pgdg22.04+1)
+
+-- Started on 2024-12-03 22:34:41 CET
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET transaction_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+-- *not* creating schema, since initdb creates it
+
+
+ALTER SCHEMA public OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 212 (class 1259 OID 16468)
+-- Name: apps; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.apps (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    icon text,
+    content text,
+    description text,
+    category character varying(100),
+    developer character varying(255),
+    version character varying(20),
+    created_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.apps OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 16467)
+-- Name: apps_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.apps_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.apps_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3419 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: apps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.apps_id_seq OWNED BY public.apps.id;
+
+
+--
+-- TOC entry 218 (class 1259 OID 16513)
+-- Name: logs; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.logs (
+    id integer NOT NULL,
+    user_id integer,
+    action character varying(50),
+    app_id integer,
+    "timestamp" timestamp without time zone NOT NULL,
+    details jsonb
+);
+
+
+ALTER TABLE public.logs OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16512)
+-- Name: logs_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.logs_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.logs_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3420 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.logs_id_seq OWNED BY public.logs.id;
+
+
+--
+-- TOC entry 216 (class 1259 OID 16494)
+-- Name: open_windows; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.open_windows (
+    id integer NOT NULL,
+    user_id integer,
+    app_id integer,
+    title character varying(255),
+    position_x integer,
+    position_y integer,
+    size_width integer,
+    size_height integer,
+    is_maximized boolean DEFAULT false,
+    is_minimized boolean DEFAULT false,
+    z_index integer,
+    created_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.open_windows OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16493)
+-- Name: open_windows_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.open_windows_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.open_windows_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3421 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: open_windows_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.open_windows_id_seq OWNED BY public.open_windows.id;
+
+
+--
+-- TOC entry 214 (class 1259 OID 16477)
+-- Name: user_installed_apps; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.user_installed_apps (
+    id integer NOT NULL,
+    user_id integer,
+    app_id integer
+);
+
+
+ALTER TABLE public.user_installed_apps OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 16476)
+-- Name: user_installed_apps_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.user_installed_apps_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.user_installed_apps_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 3422 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: user_installed_apps_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.user_installed_apps_id_seq OWNED BY public.user_installed_apps.id;
+
+
+--
+-- TOC entry 210 (class 1259 OID 16389)
+-- Name: users; Type: TABLE; Schema: public; Owner: houssam
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    username character varying(255) NOT NULL,
+    email character varying(255) NOT NULL,
+    password_hash character varying(255) NOT NULL,
+    theme character varying(50) DEFAULT 'light'::character varying,
+    language character varying(10) DEFAULT 'en'::character varying,
+    created_at timestamp without time zone NOT NULL,
+    last_login timestamp without time zone
+);
+
+
+ALTER TABLE public.users OWNER TO houssam;
+
+--
+-- TOC entry 209 (class 1259 OID 16388)
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: houssam
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.users_id_seq OWNER TO houssam;
+
+--
+-- TOC entry 3423 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: houssam
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- TOC entry 3238 (class 2604 OID 16471)
+-- Name: apps id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.apps ALTER COLUMN id SET DEFAULT nextval('public.apps_id_seq'::regclass);
+
+
+--
+-- TOC entry 3243 (class 2604 OID 16516)
+-- Name: logs id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.logs ALTER COLUMN id SET DEFAULT nextval('public.logs_id_seq'::regclass);
+
+
+--
+-- TOC entry 3240 (class 2604 OID 16497)
+-- Name: open_windows id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.open_windows ALTER COLUMN id SET DEFAULT nextval('public.open_windows_id_seq'::regclass);
+
+
+--
+-- TOC entry 3239 (class 2604 OID 16480)
+-- Name: user_installed_apps id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_installed_apps ALTER COLUMN id SET DEFAULT nextval('public.user_installed_apps_id_seq'::regclass);
+
+
+--
+-- TOC entry 3235 (class 2604 OID 16392)
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: houssam
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- TOC entry 3406 (class 0 OID 16468)
+-- Dependencies: 212
+-- Data for Name: apps; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.apps (id, name, icon, content, description, category, developer, version, created_at) FROM stdin;
+3	Terminale	&#xf0c0;	<div id="thread_terminal" class="bg-gray-900 text-gray-300 p-4 h-full font-mono">\n  <div class="output space-y-1"></div>\n  <div class="flex items-center">\n    <span class="text-green-500">user@system</span>\n    <span class="text-blue-400">:~$</span>\n    <input\n      type="text"\n      class="ml-2 bg-transparent outline-none flex-1" style="border: solid 0 transparent;position: relative; top: -19px; left: -3px;"\n    />\n  </div>\n</div>	Application pour prendre des notes.	Utilitaire	Jane Dev	1.0.0	2024-11-01 12:00:00
+1	Nautilus	&#xf07b;	<body style="margin: 0; padding: 0; font-family: Ubuntu, Arial, sans-serif; display: flex; flex-direction: column; height: auto 100%; background-color: #f6f6f6;">\n    <div style="background-color: #3c3b37; color: white; padding: 5px 10px;">\n        <span style="font-size: 14px;">Fichiers</span>\n    </div>\n    <div style="display: flex; background-color: #e4e4e4; border-bottom: 1px solid #d7d7d7; padding: 5px;">\n        <div style="margin-right: 10px; cursor: pointer; padding: 5px 10px; background-color: #ffffff; border-radius: 5px 5px 0 0;">\n            <span style="font-size: 12px;">Documents</span>\n        </div>\n        <div style="margin-right: 10px; cursor: pointer; padding: 5px 10px;">\n            <span style="font-size: 12px;">Téléchargements</span>\n        </div>\n        <div style="cursor: pointer; padding: 5px 10px;">\n            <span style="font-size: 12px;">+</span>\n        </div>\n    </div>\n    <div style="display: flex; flex-grow: 1;">\n        <div style="width: 200px; background-color: #f3f3f3; border-right: 1px solid #d7d7d7; padding: 10px;">\n            <div style="margin-bottom: 10px; cursor: pointer;">\n                <span style="font-size: 14px;">Dossiers</span>\n            </div>\n            <div style="margin-bottom: 5px; cursor: pointer;">\n                <span style="font-size: 12px;">Documents</span>\n            </div>\n            <div style="margin-bottom: 5px; cursor: pointer;">\n                <span style="font-size: 12px;">Téléchargements</span>\n            </div>\n            <div style="margin-bottom: 5px; cursor: pointer;">\n                <span style="font-size: 12px;">Images</span>\n            </div>\n            <div style="margin-bottom: 5px; cursor: pointer;">\n                <span style="font-size: 12px;">Musique</span>\n            </div>\n            <div style="cursor: pointer;">\n                <span style="font-size: 12px;">Vidéos</span>\n            </div>\n        </div>\n        <div style="flex-grow: 1; padding: 10px; display: flex; flex-wrap: wrap; align-content: flex-start;">\n            <div style="width: 100px; height: 100px; margin: 5px; text-align: center; cursor: pointer;">\n                <div style="width: 64px; height: 64px; margin: 0 auto; background-color: #e4e4e4; border-radius: 5px;"></div>\n                <span style="font-size: 12px;">Fichier 1</span>\n            </div>\n            <div style="width: 100px; height: 100px; margin: 5px; text-align: center; cursor: pointer;">\n                <div style="width: 64px; height: 64px; margin: 0 auto; background-color: #e4e4e4; border-radius: 5px;"></div>\n                <span style="font-size: 12px;">Fichier 2</span>\n            </div>\n            <div style="width: 100px; height: 100px; margin: 5px; text-align: center; cursor: pointer;">\n                <div style="width: 64px; height: 64px; margin: 0 auto; background-color: #e4e4e4; border-radius: 5px;"></div>\n                <span style="font-size: 12px;">Fichier 3</span>\n            </div>\n        </div>\n    </div>\n    <div style="position:absolute;bottom:0;width: 100%;background-color: #f3f3f3; border-top: 1px solid #d7d7d7; padding: 0px 0px; display: flex; justify-content: space-between; align-items: center;">\n        <span style="font-size: 12px;">3 éléments</span>\n        <span style="font-size: 12px;">Espace libre : 50 Go</span>\n    </div>\n	Application permettant dexplorer les fichiers.	Utilitaire	John Dev	1.0.0	2024-11-01 12:00:00
+2	SpaceInvaders	&#xf001;	<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif; background-color: #000; color: #fff; height: 100vh; display: flex; flex-direction: column; overflow: hidden;">\n    <div style="background-color: #333; padding: 5px 10px; display: flex; justify-content: space-between; align-items: center;">\n        <div style="display: flex; align-items: center;">\n            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #ff5f56; margin-right: 8px;"></div>\n            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #ffbd2e; margin-right: 8px;"></div>\n            <div style="width: 12px; height: 12px; border-radius: 50%; background-color: #27c93f;"></div>\n        </div>\n        <span style="font-size: 14px;">Space Invaders</span>\n        <div style="width: 60px;"></div>\n    </div>\n    <div style="flex-grow: 1; display: flex; justify-content: center; align-items: center; position: relative; background-color: #000;">\n        <div style="position: absolute; top: 250px; width: 50px; height: 30px; background-color: #0f0; animation: move-cannon 4s infinite alternate;">\n        </div>\n                <div style="position: absolute; top: 220px; width: 5px; height: 5px; background-color: #000; animation: move-bullet 1s infinite alternate;">\n                </div>\n                <div style="position: absolute; top: 200px; width: 10px; height: 10px; background-color: #000; animation: move-bullet 1s infinite alternate;">\n                </div>\n        <div style="display: flex; justify-content: space-around; width: 100%; position: absolute; top: 50px; animation: move-invaders 2s infinite alternate;">\n            <div style="width: 40px; height: 40px; background-color: #f00; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>\n            <div style="width: 40px; height: 40px; background-color: #2f9; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>\n            <div style="width: 40px; height: 40px; background-color: #00f; clip-path: polygon(0% 20%, 20% 20%, 20% 40%, 40% 40%, 40% 60%, 20% 60%, 20% 80%, 80% 80%, 80% 60%, 60% 60%, 60% 40%, 80% 40%, 80% 20%, 100% 20%, 100% 100%, 0% 100%);"></div>\n        </div>\n    </div>\n    <div style="background-color: #333; padding: 10px; text-align: center; font-size: 14px;">\n        Score: 0 | Vies: 3 | Niveau: 1\n    </div>\n    <style>\n        @keyframes move-cannon {\n            0% { transform: translateX(-100px); }\n            100% { transform: translateX(100px); }\n        }\n        @keyframes move-invaders {\n            0% { transform: translateX(-20px); }\n            100% { transform: translateX(20px); }\n        }\n        @keyframes move-bullet {\n            0% { transform: translateY(-70px); }\n            25%{transform: translateX(0px);}\n            75%{transform: translateX(5px);}\n            100% { transform: translateY(30px); }\n        }\n    </style>\n\n\n	Application de musique.	Divertissement	Spotify Inc.	2.0.0	2024-11-01 12:00:00
+4	ProgramManagement	&lt;/&gt;	<div id="thread_body">\n\n<style>\n\n#thread_body {\n    font-family: Arial, sans-serif;\n    margin: 0;\n    padding: 0;\n    background-color: #f0f0f0;\n}\n\n.thread_container {\n    max-width: 1200px;\n    margin: 0 auto;\n    padding: 20px;\n}\n\n.thread_tabs {\n    display: flex;\n    margin-bottom: 20px;\n}\n\n.thread_tab-btn {\n    padding: 10px 20px;\n    border: none;\n    background-color: #ddd;\n    cursor: pointer;\n    transition: background-color 0.3s;\n}\n\n.thread_tab-btn.active {\n    background-color: #fff;\n}\n\n.thread_tab-content {\n    display: none;\n    background-color: #fff;\n    padding: 20px;\n    border-radius: 5px;\n}\n\n.thread_tab-content.active {\n    display: block;\n}\n\n.thread_editor-container {\n    display: flex;\n    gap: 20px;\n    margin-bottom: 20px;\n}\n\n.thread_editor {\n    flex: 1;\n}\n\ntextarea {\n    width: 100%;\n    height: 300px;\n    resize: vertical;\n}\n\n.thread_controls {\n    margin-bottom: 20px;\n}\n\nbutton {\n    padding: 10px 20px;\n    background-color: #4CAF50;\n    color: white;\n    border: none;\n    cursor: pointer;\n    margin-right: 10px;\n}\n\n.thread_output {\n    border: 1px solid #ddd;\n    padding: 10px;\n}\n\n#thread_outputFrame {\n    width: 100%;\n    height: 300px;\n    border: none;\n}\n\n#thread_programList {\n    list-style-type: none;\n    padding: 0;\n}\n\n#thread_programList li {\n    padding: 10px;\n    background-color: #f9f9f9;\n    margin-bottom: 5px;\n    cursor: pointer;\n}\n\n\n</style>\n\n\n    <div class="thread_container" id="thread_container">\n        <div class="thread_tabs">\n            <button class="thread_tab-btn active" data-tab="thread_editor">Éditeur</button>\n            <button class="thread_tab-btn" data-tab="thread_programs">Mes Programmes</button>\n        </div>\n        \n        <div class="thread_tab-content active" id="thread_editor">\n            <div class="thread_editor-container">\n                <div class="thread_editor html-css">\n                    <h3>HTML/CSS</h3>\n                    <textarea id="thread_htmlCssEditor"></textarea>\n                </div>\n                <div class="thread_editor js">\n                    <h3>JavaScript</h3>\n                    <textarea id="thread_jsEditor"></textarea>\n                </div>\n            </div>\n            <div class="thread_controls">\n                <button id="thread_runBtn">Exécuter</button>\n                <button id="thread_saveBtn">Sauvegarder</button>\n            </div>\n            <div class="thread_output">\n                <h3>Résultat</h3>\n                <iframe id="thread_outputFrame"></iframe>\n            </div>\n        </div>\n        \n        <div class="thread_tab-content" id="thread_programs">\n            <h2>Mes Programmes</h2>\n            <ul id="thread_programList"></ul>\n        </div>\n    </div>\n    \n</div>\n\n\n\n	Application pour faire des programmes.	Utilitaire	System	1.0.0	2024-12-01 22:04:49.743105
+\.
+
+
+--
+-- TOC entry 3412 (class 0 OID 16513)
+-- Dependencies: 218
+-- Data for Name: logs; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.logs (id, user_id, action, app_id, "timestamp", details) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3410 (class 0 OID 16494)
+-- Dependencies: 216
+-- Data for Name: open_windows; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.open_windows (id, user_id, app_id, title, position_x, position_y, size_width, size_height, is_maximized, is_minimized, z_index, created_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3408 (class 0 OID 16477)
+-- Dependencies: 214
+-- Data for Name: user_installed_apps; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.user_installed_apps (id, user_id, app_id) FROM stdin;
+1	22	1
+3	22	2
+2	2	3
+4	24	4
+\.
+
+
+--
+-- TOC entry 3404 (class 0 OID 16389)
+-- Dependencies: 210
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: houssam
+--
+
+COPY public.users (id, username, email, password_hash, theme, language, created_at, last_login) FROM stdin;
+7	johndoe	johndoe@example.com	hashed_password1	dark	en	2024-11-28 20:27:11.984937	2024-11-28 20:27:11.984937
+8	janadoa	janadoa@example.com	hashed_password2	light	fr	2024-11-28 20:27:11.984937	2024-11-28 20:27:11.984937
+9	alexsmith	alexsmith@example.com	hashed_password3	dark	en	2024-11-28 20:27:11.984937	\N
+10	emilyjones	emilyjones@example.com	hashed_password4	light	es	2024-11-28 20:27:11.984937	2024-11-28 20:27:11.984937
+11	michaelbrown	michaelbrown@example.com	hashed_password5	dark	de	2024-11-28 20:27:11.984937	\N
+12	sarahwhite	sarahwhite@example.com	hashed_password6	light	it	2024-11-28 20:27:11.984937	2024-11-28 20:27:11.984937
+13	lol	kjhgjgh@jgvfhjg.com	jjj	light	en	2024-11-30 22:53:52.33416	2024-11-30 22:53:52.33416
+18	lolita	lalali@mail.com	password123	light	en	2024-11-30 23:01:12.23059	2024-11-30 23:01:12.23059
+22	sohnjoe	joffdoe@example.com	$2b$10$FYwFHLF.D.y4E8G31mHnAO6GfOP/aNqiHLQZpe4C0bWyfMddB2MAi	light	en	2024-11-30 23:09:23.074859	2024-11-30 23:09:23.074859
+23	janidoe	janidoe@example.com	$2b$10$y5Po1JSgaWWR7vcZWH0lxO1q24XshLxGJiNcdZ7JWYQebha/UNKfC	light	en	2024-11-30 23:21:07.610201	2024-11-30 23:21:07.610201
+2	houssam	houssambacar67@gmail.com	$2b$10$FYwFHLF.D.y4E8G31mHnAO6GfOP/aNqiHLQZpe4C0bWyfMddB2MAi	light	en	2024-11-01 12:00:00	2024-11-24 14:30:00
+24	System	System@winmanager.local	nopass-isempty	dark	en	2024-12-01 22:07:50.570312	2024-12-01 22:07:50.570312
+\.
+
+
+--
+-- TOC entry 3424 (class 0 OID 0)
+-- Dependencies: 211
+-- Name: apps_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.apps_id_seq', 4, true);
+
+
+--
+-- TOC entry 3425 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: logs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.logs_id_seq', 1, true);
+
+
+--
+-- TOC entry 3426 (class 0 OID 0)
+-- Dependencies: 215
+-- Name: open_windows_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.open_windows_id_seq', 1, true);
+
+
+--
+-- TOC entry 3427 (class 0 OID 0)
+-- Dependencies: 213
+-- Name: user_installed_apps_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.user_installed_apps_id_seq', 4, true);
+
+
+--
+-- TOC entry 3428 (class 0 OID 0)
+-- Dependencies: 209
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: houssam
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 25, true);
+
+
+--
+-- TOC entry 3251 (class 2606 OID 16475)
+-- Name: apps apps_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.apps
+    ADD CONSTRAINT apps_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3257 (class 2606 OID 16520)
+-- Name: logs logs_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.logs
+    ADD CONSTRAINT logs_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3255 (class 2606 OID 16501)
+-- Name: open_windows open_windows_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.open_windows
+    ADD CONSTRAINT open_windows_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3253 (class 2606 OID 16482)
+-- Name: user_installed_apps user_installed_apps_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_installed_apps
+    ADD CONSTRAINT user_installed_apps_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3245 (class 2606 OID 16402)
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: houssam
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
+-- TOC entry 3247 (class 2606 OID 16398)
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: houssam
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3249 (class 2606 OID 16400)
+-- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: houssam
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_username_key UNIQUE (username);
+
+
+--
+-- TOC entry 3262 (class 2606 OID 16526)
+-- Name: logs logs_app_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.logs
+    ADD CONSTRAINT logs_app_id_fkey FOREIGN KEY (app_id) REFERENCES public.apps(id);
+
+
+--
+-- TOC entry 3263 (class 2606 OID 16521)
+-- Name: logs logs_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.logs
+    ADD CONSTRAINT logs_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3260 (class 2606 OID 16507)
+-- Name: open_windows open_windows_app_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.open_windows
+    ADD CONSTRAINT open_windows_app_id_fkey FOREIGN KEY (app_id) REFERENCES public.apps(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3261 (class 2606 OID 16502)
+-- Name: open_windows open_windows_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.open_windows
+    ADD CONSTRAINT open_windows_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3258 (class 2606 OID 16488)
+-- Name: user_installed_apps user_installed_apps_app_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_installed_apps
+    ADD CONSTRAINT user_installed_apps_app_id_fkey FOREIGN KEY (app_id) REFERENCES public.apps(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3259 (class 2606 OID 16483)
+-- Name: user_installed_apps user_installed_apps_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.user_installed_apps
+    ADD CONSTRAINT user_installed_apps_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 3418 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE USAGE ON SCHEMA public FROM PUBLIC;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2024-12-03 22:34:43 CET
+
+--
+-- PostgreSQL database dump complete
+--
+
