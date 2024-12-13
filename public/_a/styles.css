@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.admin-interface {
+    display: flex;
+    flex-direction: column;
+}
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background-color: #333;
+    padding: 10px;
+}
+
+.tabs button {
+    color: white;
+    background-color: #444;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.tabs button:hover {
+    background-color: #555;
+}
+
+.tab-content {
+    display: none;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+h3 {
+    color: #333;
+}
+
+.app-bubble {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: #00ff99; /* Couleur néon vert */
+    border-radius: 50%;
+    text-align: center;
+    color: #156445;  /* Couleur du texte en vert néon */
+    line-height: 150px;
+    font-size: 18px;
+    font-family: 'Orbitron', sans-serif; /* Police futuriste */
+    margin: 20px;
+    cursor: pointer;
+    transform: scale(0);
+    opacity: 0;
+    box-shadow: 0 0 20px 5px rgba(0, 255, 153, 0.7), 0 0 60px 10px rgba(0, 255, 153, 0.5); /* Effet néon lumineux */
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    filter: blur(0px);
+}
+
+.app-bubble:hover {
+    transform: scale(1.1); /* Agrandir au survol */
+    opacity: 1;
+    box-shadow: 0 0 30px 10px rgba(0, 255, 85, 0.8), 0 0 80px 15px rgba(0, 255, 153, 0.6); /* Augmenter la lueur néon */
+    filter: blur(0.2px);
+    animation: neonGlow 1.1s infinite alternate; /* Animation de lueur clignotante */
+}
+
+/* Animation de la lueur clignotante pour un effet cyberpunk */
+@keyframes neonGlow {
+    0% {
+        box-shadow: 0 0 20px 5px rgba(0, 255, 153, 0.7), 0 0 60px 10px rgba(0, 255, 153, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 40px 10px rgba(0, 255, 153, 1), 0 0 100px 20px rgba(0, 255, 153, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 20px 5px rgba(0, 255, 153, 0.7), 0 0 60px 10px rgba(0, 255, 153, 0.5);
+    }
+}
+
+/* Ajout d'un fond sombre pour renforcer l'effet cyberpunk */
+body {
+    background-color: #121212; /* Fond sombre */
+    color: rgb(102, 89, 89); /* Texte clair */
+    font-family: 'Roboto', sans-serif;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Ajouter un effet de texte cyberpunk */
+h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: #204379;
+    text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 30px #00ff99;
+}
+
+/* Appliquer une animation au texte */
+@keyframes textAnimation {
+    0% {
+        text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 30px #00ff99;
+    }
+    50% {
+        text-shadow: 0 0 30px #ff00ff, 0 0 60px #ff00ff, 0 0 90px #ff00ff;
+    }
+    100% {
+        text-shadow: 0 0 10px #00ff99, 0 0 20px #00ff99, 0 0 30px #00ff99;
+    }
+}
+
+/* Animation du titre */
+h3 {
+    animation: textAnimation 3s infinite alternate;
+}

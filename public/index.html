@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionnaire de Fenêtres</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .system-tray {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px;
+            background: rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .icon {
+            font-family: 'Font Awesome 5 Free';
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .popup {
+            position: fixed;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(200, 200, 200, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            display: none;
+            z-index: 1000;
+            bottom: 45px;
+            min-width: 200px;
+            animation: popup-slide-up 0.3s ease;
+        }
+
+        @keyframes popup-slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .popup h4 {
+            margin: 0 0 12px 0;
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 8px;
+        }
+        
+        .volume-slider {
+            width: 100%;
+            margin: 15px 0;
+            height: 4px;
+            -webkit-appearance: none;
+            background: #e0e0e0;
+            border-radius: 2px;
+            outline: none;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            background: #4a90e2;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            background: #357abd;
+        }
+        
+        .wifi-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .wifi-list li {
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .wifi-list li:hover {
+            background-color: rgba(74, 144, 226, 0.1);
+            color: #4a90e2;
+        }
+
+        .wifi-list li i {
+            margin-left: 10px;
+            color: #666;
+        }
+        
+        .settings-menu {
+            min-width: 250px;
+        }
+        
+        .settings-menu div {
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .settings-menu div i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+            color: #666;
+        }
+        
+        .settings-menu div:hover {
+            background-color: rgba(74, 144, 226, 0.1);
+            color: #4a90e2;
+        }
+
+        #battery-popup {
+            min-width: 220px;
+        }
+
+        .battery-info {
+            margin-bottom: 10px;
+            padding: 8px;
+            background: rgba(0,0,0,0.03);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .battery-info i {
+            margin-right: 10px;
+            color: #4a90e2;
+        }
+
+        #clock {
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            padding: 0 10px;
+            color: #fff;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body style="display: none;">
+  <div id="whcivm-container" class="desktop"></div>
+    <div id="taskbar">
+        <button id="start-menu-button" onclick="toggleStartMenu()">Menu</button>
+        <div id="running-apps"></div>
+        <div class="apps" style="background: linear-gradient(to bottom, #2c3e50, #34495e); overflow-x: scroll;">
+        <!-- Il faut installer les apps ici ! -->
+        </div>
+        <div class="system-tray">
+            <span class="icon" id="volume-icon" title="Volume"><i class="fas fa-volume-up"></i></span>
+            <span class="icon" id="wifi-icon" title="Wi-Fi"><i class="fas fa-wifi"></i></span>
+            <span class="icon" id="settings-icon" title="Paramètres"><i class="fas fa-cog"></i></span>
+            <span class="icon" id="battery-icon" title="Batterie"><i class="fas fa-battery-three-quarters"></i></span>
+            <span class="icon" id="power-icon" title="Extinction"><i class="fas fa-power-off"></i></span>
+            <span id="clock"></span>
+        </div>
+    </div>
+
+    <!-- Menu des applications -->
+    <div id="start-menu" style="display: none;">
+        <div class="start-menu-content">
+            <div class="start-menu-header">
+                <h1 class="start-menu-title">Applications installées</h1>
+                <button id="close-menu-button" onclick="toggleStartMenu()">✖</button>
+            </div>
+            <div class="start-menu-apps" id="installed-apps"></div>
+        </div>
+    </div>
+
+    <!-- Popups pour chaque icône -->
+    <div id="volume-popup" class="popup">
+        <h4><i class="fas fa-volume-up"></i> Volume système</h4>
+        <input type="range" class="volume-slider" min="0" max="100" value="50">
+        <div style="text-align: center; color: #666;">
+            <span id="volume-value">50</span>%
+        </div>
+    </div>
+
+    <div id="wifi-popup" class="popup">
+        <h4><i class="fas fa-wifi"></i> Réseaux Wi-Fi</h4>
+        <ul class="wifi-list">
+            <li>Réseau_1 <i class="fas fa-lock"></i></li>
+            <li>Réseau_2 <i class="fas fa-unlock"></i></li>
+            <li>Réseau_3 <i class="fas fa-lock"></i></li>
+            <li>Réseau_4 <i class="fas fa-lock"></i></li>
+        </ul>
+    </div>
+
+    <div id="settings-popup" class="popup settings-menu">
+        <h4><i class="fas fa-cog"></i> Paramètres rapides</h4>
+        <div><i class="fas fa-paint-brush"></i> Personnalisation</div>
+        <div><i class="fas fa-volume-up"></i> Son</div>
+        <div><i class="fas fa-desktop"></i> Affichage</div>
+        <div><i class="fas fa-network-wired"></i> Réseau & Internet</div>
+        <div><i class="fas fa-battery-full"></i> Batterie</div>
+    </div>
+
+    <div id="battery-popup" class="popup">
+        <h4><i class="fas fa-battery-full"></i> État de la batterie</h4>
+        <div class="battery-info">
+            <i class="fas fa-percentage"></i>
+            <span>Niveau: 75%</span>
+        </div>
+        <div class="battery-info">
+            <i class="fas fa-plug"></i>
+            <span>En charge</span>
+        </div>
+        <div class="battery-info">
+            <i class="fas fa-clock"></i>
+            <span>Temps restant: 2h 15min</span>
+        </div>
+    </div>
+
+
+    <!-- Menu des applications -->
+      <div id="start-menu" style="display: none;">
+        <div class="start-menu-content">
+          <div class="start-menu-header">
+            <h1 class="start-menu-title">Applications installées</h1>
+            <button onclick="openInstallAppForm()" class="">+ Ajouter une application</button>
+            <button id="close-menu-button" onclick="toggleStartMenu()">✖</button> <!-- Bouton de fermeture -->
+          </div>
+          <div class="start-menu-apps" id="installed-apps"></div>
+        </div>
+      </div>
+      <script src="utils.js"></script>
+      <script src="./EnvironnementFonctionnel.js"></script>
+      <script src="./Thread.js"></script>  
+    <script src="winmanager.js"></script>
+    <script src="Programme.js"></script>
+    <script src="./ChargerProgrammes.js"></script>
+    <script src="LoadMain.js"></script>
+    <script src="app.js"></script>
+
+
+    <script>
+        // Mise à jour de l'horloge
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('fr-FR', { 
+                hour: '2-digit', 
+                minute: '2-digit'
+            });
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Gestionnaire des popups
+        const icons = ['volume', 'wifi', 'settings', 'battery'];
+        let activePopup = null;
+
+        icons.forEach(icon => {
+            const iconElement = document.getElementById(`${icon}-icon`);
+            const popup = document.getElementById(`${icon}-popup`);
+            
+            iconElement.addEventListener('click', (e) => {
+                e.stopPropagation();
+                
+                if (activePopup === popup) {
+                    popup.style.display = 'none';
+                    activePopup = null;
+                } else {
+                    if (activePopup) {
+                        activePopup.style.display = 'none';
+                    }
+                    const rect = iconElement.getBoundingClientRect();
+                    popup.style.display = 'block';
+                    popup.style.bottom = (window.innerHeight - rect.top + 5) + 'px';
+                    popup.style.right = (window.innerWidth - rect.right) + 'px';
+                    activePopup = popup;
+                }
+            });
+        });
+
+        // Fermer les popups en cliquant ailleurs
+        document.addEventListener('click', () => {
+            if (activePopup) {
+                activePopup.style.display = 'none';
+                activePopup = null;
+            }
+        });
+
+        // Gestion du volume
+        const volumeSlider = document.querySelector('.volume-slider');
+        const volumeValue = document.getElementById('volume-value');
+
+        volumeSlider.addEventListener('input', (e) => {
+            const value = e.target.value;
+            volumeValue.textContent = value;
+        });
+
+        // Gestion de l'extinction
+        document.getElementById('power-icon').addEventListener('click', () => {
+            if (confirm('Voulez-vous vraiment éteindre le système ?')) {
+                localStorage.clear();
+                document.location = 'connect.html';
+            }
+        });
+    </script>
+</body>
+</html>

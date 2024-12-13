@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interface Administrateur</title>
+    <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="admin-interface">
+        <div class="tabs">
+            <button class="" data-tab="">WINMANAGER<br>ADMIN</button>
+            <button class="tab-button" data-tab="users-content" id="users-tab">Utilisateurs</button>
+            <button class="tab-button" data-tab="apps-content" id="apps-tab">Applications</button>
+            <button class="tab-button" data-tab="logs-content" id="logs-tab">Logs</button>
+            <button class="tab-button" data-tab="installed-apps-content" id="installed-apps-tab">Applications Installées</button>
+            <button class="tab-button" data-tab="open-windows-content" id="open-windows-tab">Fenêtres Ouvertes</button>
+            <button class="tab-button" data-tab="userdata-content" id="userdata-tab">UserData</button>
+        </div>
+        
+
+        <div class="tab-content" id="users-content">
+            <h3>Utilisateurs</h3>
+            <ul id="user-list"></ul>
+<button id="delete-selected-btn">Supprimer les utilisateurs sélectionnés</button>
+
+<h4>Ajouter un utilisateur</h4>
+    <form id="create-user-form">
+        <label for="username">Nom d'utilisateur :</label>
+        <input type="text" id="username" required>
+        <label for="email">Email :</label>
+        <input type="email" id="email" required>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" required>
+        <button type="submit">Créer l'utilisateur</button>
+    </form>
+
+        </div>
+
+        <div class="tab-content" id="apps-content">
+            <h3>Applications</h3>
+            <ul id="apps-list"></ul>
+        </div>
+
+        <div class="tab-content" id="logs-content">
+            <h3>Logs</h3>
+            <ul id="logs-list"></ul>
+        </div>
+
+        <div class="tab-content" id="installed-apps-content">
+            <h3>Applications Installées</h3>
+            <ul id="user-apps-list"></ul>
+        </div>
+
+        <div class="tab-content" id="open-windows-content">
+            <h3>Fenêtres Ouvertes</h3>
+            <ul id="open-windows-list"></ul>
+        </div>
+
+        <div class="tab-content" id="userdata-content">
+            <h3>Structure de USERDATA</h3>
+            <pre id="userdata-structure"></pre>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
