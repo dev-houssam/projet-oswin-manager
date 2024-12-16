@@ -73,7 +73,7 @@ CREATE TABLE public.logs (
 
 
 --
--- Name: logs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: logs_id_seq; Type: SEQUENCE; Schema: public; Owner Мы на месте!: -
 --
 
 CREATE SEQUENCE public.logs_id_seq
@@ -86,7 +86,7 @@ CREATE SEQUENCE public.logs_id_seq
 
 
 --
--- Name: logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+-- Name: logs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner Мы на месте!: -
 --
 
 ALTER SEQUENCE public.logs_id_seq OWNED BY public.logs.id;
@@ -343,8 +343,8 @@ button {
 
     <div class="thread_container" id="thread_container">
         <div class="thread_tabs">
-            <button class="thread_tab-btn active" data-tab="thread_editor">Éditeur</button>
-            <button class="thread_tab-btn" data-tab="thread_programs">Mes Programmes</button>
+            <button class="thread-tab-btn active" data-tab="thread_editor">Éditeur</button>
+            <button class="thread-tab-btn" data-tab="thread_programs">Mes Programmes</button>
         </div>
         
         <div class="thread_tab-content active" id="thread_editor">
@@ -379,7 +379,7 @@ button {
 
 
 ', 'Application pour faire des programmes.', 'Utilitaire', 'System', '1.0.0', '2024-12-01 22:04:49.743105', 'system');
-INSERT INTO public.apps VALUES (40, 'Administration', 'AD', '<iframe src="http://localhost:3000/_a/" title="Interface Admin" style="width: 100%; height: 700px;"></iframe>', 'Gestion de WinManager', 'Administration & Système', 'developer', '1.0.0', '2024-12-11 02:57:01.369616', 'user');
+INSERT INTO public.apps VALUES (40, 'Формальный вариантHCK', 'AD', '<iframe src="http://localhost:3000/_a/" title="Interface Admin" style="width: 100%; height: 700px;"></iframe>', 'Мы на месте!', 'Administration & Système', 'developer', '1.0.0', '2024-12-11 02:57:01.369616', 'user');
 
 
 --
@@ -406,9 +406,9 @@ INSERT INTO public.user_installed_apps VALUES (37, 24, 40);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (36, 'houssam', 'houssambacar67@gmail.com', '$2b$10$RqliIgPc8Fi4.Vt6f2CLi.TFAYfZv7gectciJI8oLprRck2N.HXly', 'light', 'en', '2024-12-11 01:48:13.972719', '2024-12-11 01:48:13.972719', '4049cf6baff977e571e74ba92ef3e0c2');
-INSERT INTO public.users VALUES (24, 'System', 'System@winmanager.local', '$2b$10$RqliIgPc8Fi4.Vt6f2CLi.TFAYfZv7gectciJI8oLprRck2N.HXly', 'dark', 'en', '2024-12-01 22:07:50.570312', '2024-12-01 22:07:50.570312', 'systemdata');
-INSERT INTO public.users VALUES (39, 'Reda', 'reda@example.com', '$2b$10$/PTsWmtFtf0I0CeHjynIHu2bqZxp7XDjA9raekZBxxIfkPTdSXMqG', 'light', 'en', '2024-12-12 15:39:07.249625', '2024-12-12 15:39:07.249625', 'd97ec092fece4f9c8388dbb4a6a306ee');
+INSERT INTO public.users VALUES (36, 'Форнт', 'Формальный.вариант@gmail.com', '$2b$10$RqliIgPc8Fi4.Vt6f2CLi.TFAYfZv7gectciJI8oLprRck2N.HXly', 'light', 'en', '2024-12-11 01:48:13.972719', '2024-12-11 01:48:13.972719', '4049cf6baff977e571e74ba92ef3e0c2');
+INSERT INTO public.users VALUES (24, 'System', 'Фвариант@Формальныйвариант.local', '$2b$10$RqliIgPc8Fi4.Vt6f2CLi.TFAYfZv7gectciJI8oLprRck2N.HXly', 'dark', 'en', '2024-12-01 22:07:50.570312', '2024-12-01 22:07:50.570312', 'Формальныйвариант');
+INSERT INTO public.users VALUES (39, 'RFC00', 'doom@example.com', '$2b$10$/PTsWmtFtf0I0CeHjynIHu2bqZxp7XDjA9raekZBxxIfkPTdSXMqG', 'light', 'en', '2024-12-12 15:39:07.249625', '2024-12-12 15:39:07.249625', 'd97ec092fece4f9c8388dbb4a6a306ee');
 
 
 --
