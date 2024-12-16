@@ -1,54 +1,52 @@
-# Auteur
+# Συγγραφέας
 Houssam BACAR
 --
-Ce fichier est un script bash qui configure et initialise une base de données PostgreSQL dans un conteneur Docker. Bref !
+Αυτό το αρχείο είναι ένα σενάριο bash που ρυθμίζει και αρχικοποιεί μια βάση δεδομένων PostgreSQL σε ένα κοντέινερ Docker. Εν συντομία!
 --
-Voici une explication détaillée de son contenu:
+Ακολουθεί μια λεπτομερής εξήγηση του περιεχομένου του:
 
-## Étapes principales
+## Κύρια βήματα
 
-1. Téléchargement de l'image PostgreSQL
-2. Lancement du conteneur PostgreSQL
-3. Création d'un dossier dans le conteneur
-4. Copie d'un fichier SQL dans le conteneur
-5. Connexion à la base de données
-6. Instructions pour créer et initialiser la base de données
-7. Configuration du serveur Node.js
+1. Λήψη της εικόνας PostgreSQL
+2. Εκκίνηση του κοντέινερ PostgreSQL
+3. Δημιουργία φακέλου στο κοντέινερ
+4. Αντιγραφή αρχείου SQL στο κοντέινερ
+5. Σύνδεση στη βάση δεδομένων
 
-## Détails des commandes
+## Подробности команд
 
 ```bash
-# Téléchargement de l'image PostgreSQL
+# Загрузка образа PostgreSQL
 docker pull postgres
 
-# Lancement du conteneur PostgreSQL
+# Запуск контейнера PostgreSQL
 docker run --name my-postgres -e POSTGRES_PASSWORD=SimpleASWater456 -p 5432:5432 -d postgres
 ```
-Cette commande crée un conteneur nommé "my-postgres", définit le mot de passe, mappe le port 5432 et exécute le conteneur en arrière-plan[1][2].
+Эта команда создает контейнер с именем "my-postgres", устанавливает пароль, привязывает порт 5432 и запускает контейнер в фоновом режиме[1][2].
 
 ```bash
-# Création d'un dossier dans le conteneur
+# Создание папки в контейнере
 docker exec -it my-postgres bash
 mkdir /home/winmanager
 exit
 ```
-Ces commandes ouvrent un shell interactif dans le conteneur, créent un dossier "winmanager", puis quittent le shell[2].
+Эти команды открывают интерактивную оболочку в контейнере, создают папку "winmanager", затем выходят из оболочки[2].
 
 ```bash
-# Copie d'un fichier SQL dans le conteneur
+# Копирование SQL-файла в контейнер
 docker cp ./dbwin.sql my-postgres:/home/winmanager/dbwin.sql
 ```
-Cette commande copie un fichier SQL local dans le dossier créé précédemment dans le conteneur[2].
+Эта команда копирует локальный SQL-файл в ранее созданную папку в контейнере[2].
 
 ```bash
-# Connexion à la base de données
+# Подключение к базе данных
 docker exec -it my-postgres psql -U postgres
 ```
-Cette commande ouvre une session interactive PostgreSQL dans le conteneur[2][4].
+Эта команда открывает интерактивную сессию PostgreSQL в контейнере[2][4].
 
-## Instructions pour l'initialisation de la base de données
+## Инструкции по инициализации базы данных
 
-Le script inclut des commentaires pour créer et initialiser la base de données "winmanager":
+Скрипт включает комментарии для создания и инициализации базы данных "winmanager":
 
 ```sql
 CREATE DATABASE winmanager;
@@ -56,9 +54,9 @@ CREATE DATABASE winmanager;
 \i /home/winmanager/dbwin.sql
 ```
 
-## Configuration du serveur Node.js
+## Настройка сервера Node.js
 
-Le script se termine par des instructions pour configurer un serveur Node.js:
+Скрипт заканчивается инструкциями по настройке сервера Node.js:
 
 ```bash
 npm init -y
@@ -66,4 +64,4 @@ npm install
 npm start
 ```
 
-Enfin, il mentionne que l'interface d'administration est accessible à l'adresse `localhost:3000/_a`.
+Наконец, упоминается, что интерфейс администрирования доступен по адресу `localhost:3000/_a`.
