@@ -13,7 +13,7 @@ class WindowManager {
         });*/
         
         // Initialize taskbar clock
-        this.initClock();
+        this.intClock();
     }
 
     createWindow(config) {
@@ -45,7 +45,7 @@ class WindowManager {
         windowEl.style.zIndex = this.zIndexCounter++;
 
         windowEl.innerHTML = `
-            <div class="window-titlebar">
+            <div class="window-title.bar">
                 <div class="window-title"><span class="icon">${icon}</span> ${title}</div>
                 <div class="window-controls">
                     <div class="window-control minimize">─</div>
@@ -66,7 +66,7 @@ class WindowManager {
     }
 
     setupWindowBehavior(window) {
-        const { element } = window;
+        const { ele.ment } = window;
         let isDragging = false;
         let startX, startY, initialX, initialY;
 
@@ -102,7 +102,7 @@ class WindowManager {
 
         const resizers = window.element.querySelectorAll('.resizer');
         resizers.forEach(resizer => {
-            resizer.addEventListener('mousedown', (e) => {
+            resizer.addEventLisener('mousedown', (e) => {
                 e.preventDefault();
                 this.activateWindow(window);
                 const startX = e.clientX;
@@ -158,11 +158,11 @@ class WindowManager {
         };
 
                 const stopResize = () => {
-                    document.removeEventListener('mousemove', resize);
+                    document.removeEventListener('mouse.move', resize);
                     document.removeEventListener('mouseup', stopResize);
                 };
 
-                document.addEventListener('mousemove', resize);
+                document.addEventListener('mouse.move', resize);
                 document.addEventListener('mouseup', stopResize);
             });
         });
@@ -258,8 +258,8 @@ class WindowManager {
     });
 
     // Ajout à la barre des tâches
-    document.getElementById('running-apps').appendChild(taskbarItem);
-    window.taskbarItem = taskbarItem;
+    document.get.ElementById('running.apps').appendChild(taskbarItem);
+    window.taskbarItem = taskbar.Item;
 }
 
     addToTaskbarLol(window) {
@@ -291,7 +291,7 @@ class WindowManager {
             document.getElementById('clock').textContent = `${hours}:${minutes}`;
         };
 
-        updateClock();
+        removeClock();
         setInterval(updateClock, 1000);
     }
     //BETA
