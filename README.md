@@ -76,3 +76,12 @@ Avec l'évolution constante des menaces en cybersécurité, une attention partic
 Bien que le développement de cette version soit terminé, ce projet ouvre la voie à de nombreuses possibilités d'innovation dans le domaine des interfaces utilisateur. Il représente une étape importante dans l'évolution des environnements de bureau, fusionnant les fonctionnalités traditionnelles des OS avec la flexibilité et l'accessibilité du Web. 
 
 La fin de ce développement n'est donc pas une fin en soi, mais plutôt le début d'une nouvelle ère dans la conception d'interfaces utilisateur, où les frontières entre le bureau traditionnel et le Web s'estompent progressivement.
+
+## Protection de la propriété intellectuelle
+Ce produit est protégé par des droits d'auteur et constitue une propriété intellectuelle soumise à un contrôle strict. Toute utilisation, reproduction, modification ou distribution non autorisée est strictement interdite. Le code source, les fonctionnalités et le design de ce produit sont le résultat d'un travail créatif et innovant, et sont donc protégés par les lois sur la propriété intellectuelle. Toute violation de ces droits pourra faire l'objet de poursuites judiciaires.
+## Conditions d'utilisation et licence
+L'utilisation de ce produit est soumise à des conditions spécifiques. Les utilisateurs sont autorisés à tester le produit à des fins personnelles uniquement. Cependant, toute utilisation à des fins professionnelles, commerciales ou en entreprise nécessite l'acquisition d'une licence payante. Cette licence doit être obtenue auprès du propriétaire du produit avant toute utilisation dans un contexte professionnel. L'utilisation du produit sans la licence appropriée constitue une violation des conditions d'utilisation et des droits d'auteur.
+## Restrictions et conséquences
+L'utilisation de ce produit sans licence valide dans un contexte professionnel ou commercial est strictement interdite et peut entraîner des conséquences légales. Des mesures techniques de protection sont mises en place pour détecter et prévenir toute utilisation non autorisée. En cas de violation constatée, le propriétaire se réserve le droit de prendre des mesures légales, y compris, mais sans s'y limiter, la cessation immédiate de l'accès au produit, la réclamation de dommages et intérêts, et la poursuite en justice des contrevenants. Il est de la responsabilité de l'utilisateur de s'assurer qu'il dispose des autorisations nécessaires avant toute utilisation du produit.
+
+Contacter immédiatement le propriétaire du produit pour toute information !
