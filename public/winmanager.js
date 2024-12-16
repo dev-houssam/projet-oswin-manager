@@ -1,7 +1,7 @@
 class WindowManager {
     constructor() {
         this.windows = new Map();
-        this.activeWindow = null;
+        this.active.Window = null;
         this.zIndexCounter = 100;
         
         /*this.jsPlumbInstance = jsPlumb.getInstance({  // Crée une instance de jsPlumb
