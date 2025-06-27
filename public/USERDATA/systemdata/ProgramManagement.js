@@ -1,20 +1,7 @@
 {
-/***/
 	function PM_editeur(numThreads=0){
-
-		// ATTENTION DANGER : il faut pas oublier d'utiliser numthread
-		// Il ne faut pas oublier de generer le bon prototype
-
-		//Seul les id doivent etre proteger
-
 		async function storeInDatabase(nom, programContent, jsProgram,  icon, description, category){
-			/*
-			
-			"SpaceInvaders", 
-	{ x: 800, y: 100, width : 500, height: 350, 
-	color: 'rgba(20, 20, 20, 1)', layer: 4, moveable: true,  focusable:true}, 
-
-			*/
+			//Attention, ici on mélange un peu trop les responsabilités
 			try {
 				const token = localStorage.getItem('authToken');
 				if (!token) {
@@ -26,7 +13,7 @@
 					  method: 'POST',
 					  headers: {
 							'Authorization': `Bearer ${token}`,
-						  'Content-Type': 'application/json',
+						  	'Content-Type': 'application/json',
 					  },
 					  body: JSON.stringify({ nom, programContent, jsProgram, icon, description, category }),
 				  });
@@ -41,14 +28,10 @@
 			  } catch (error) {
 				  console.error('Erreur lors de l\'enregistrement. :', error.message);
 				  alert('Enregistrement échouée.');
+				  // La fonction beta serait d'ajouter des fenetres modales facilement gerable
 			  }
-		}//END FONCTION
-
-
+		}
 		function getProgramListFromDB(programList) {
-			//programList.innerHTML = 'FROM'; // Réinitialiser la liste
-		
-			// Ajouter un titre "FROM DB" en haut de la liste
 			const title = document.createElement('h3');
 			title.textContent = "FROM DB";
 			programList.appendChild(title);
@@ -73,7 +56,6 @@
 				// Pour chaque programme récupéré, ajouter un élément de liste
 				data.apps.forEach(program => {
 					const li = document.createElement('li');
-					//li.textContent = program.name ;
 					li.innerHTML = `<i style="color: red; font-size: 24px;">X</i>
 					:${program.icon}| ${program.name} | ${program.description} | ${program.category}`;
 					li.title = "Ce programme n'est plus modifiable ! Veuillez créer un nouveau programme !";
@@ -88,10 +70,8 @@
 					// Lorsque le bouton est cliqué, supprimer le programme
 					deleteButton.addEventListener('click', async (e) => {
 						e.stopPropagation(); // Empêche le clic sur le programme de déclencher le "loadProgram"
-		
 						// Supprimer du localStorage
 						removeProgramFromLocalStorage(program);
-		
 						// Supprimer de la base de données via l'API
 						try {
 							await deleteProgramFromDatabase(program.name);
@@ -100,14 +80,9 @@
 							console.error('Erreur lors de la suppression du programme:', error);
 							alert('Erreur lors de la suppression du programme.');
 						}
-		
-						// Rafraîchir la liste
-						//updateProgramList();
 					});
-		
 					// Ajouter le bouton poubelle à l'élément de la liste
 					li.appendChild(deleteButton);
-		
 					// Ajouter l'élément à la liste
 					programList.appendChild(li);
 					
@@ -118,12 +93,6 @@
 				alert('Erreur lors du chargement des programmes.');
 			});
 		}
-		
-		
-		
-		
-		
-		//END FONCTION
 
 		function replaceHTML_CSS_IDs(code, motif) {
 			// Remplace les ID statiques par des ID dynamiques dans HTML et JS
@@ -146,33 +115,18 @@
 			code = code.replace(/(?<=querySelectorAll\(['"])\.([^'"]+)/g, `.${motif}-$1`);
 			return code;
 		  }
-		  
 		  // Exemple d'utilisation
 		  let motifHTMLCSS = 'thread_';
 		  let motifJS = `"+numThreads+"`;
-		  
-		  
-
-
-		  
-
-		//END FONCTION
-
-			
 		    const tabBtns = document.querySelectorAll(`.${numThreads}-tab-btn`);
 		    const tabContents = document.querySelectorAll(`.${numThreads}-tab-content`);
 		    const htmlCssEditor = document.getElementById(numThreads+'-htmlCssEditor');
-			//alert(numThreads);
 		    const jsEditor = document.getElementById(numThreads+'-jsEditor');
 		    const runBtn = document.getElementById(numThreads+'-runBtn');
 			console.info("btn::"+numThreads+'-runBtn');
 		    const saveBtn = document.getElementById(''+numThreads+'-saveBtn');
 		    const outputFrame = document.getElementById(''+numThreads+'-outputFrame');
 		    const programList = document.getElementById(''+numThreads+'-programList');
-
-
-			//getProgramListFromDB(programList);
-
 		    // Gestion des onglets
 		    tabBtns.forEach(btn => {
 			btn.addEventListener('click', () => {
@@ -185,11 +139,9 @@
 
 		    // Exécution du code
 		    runBtn.addEventListener('click', () => {
-			const html = htmlCssEditor.value;
-			const js = jsEditor.value;
-			
-			
-			const combinedCode = `
+			    const html = htmlCssEditor.value;
+			    const js = jsEditor.value;
+			    const combinedCode = `
 			    ${html}
 			    <script>${js}<\/script>
 			`;
@@ -222,30 +174,14 @@
 			    const programs = JSON.parse(localStorage.getItem(`${numThreads}-programs`) || '[]');
 			    programs.push(program);
 			    localStorage.setItem(`${numThreads}-programs`, JSON.stringify(programs));
-
-
-
-				storeInDatabase(programName, modifiedHTMLCode, modifiedJSCode, icon, description, category);
-
+			    storeInDatabase(programName, modifiedHTMLCode, modifiedJSCode, icon, description, category);
 			    updateProgramList();
 			}
 		    });
-
-		    // Mise à jour de la liste des programmes
-		    /*function updateProgramList() {
-			programList.innerHTML = '';
-			const programs = JSON.parse(localStorage.getItem(`${numThreads}-programs`) || '[]');
-			programs.forEach(program => {
-			    const li = document.createElement('li');
-			    li.textContent = program.name;
-			    li.addEventListener('click', () => loadProgram(program));
-			    programList.appendChild(li);
-			});
-		    }*/
-			function updateProgramList() {
+		function updateProgramList() {
 				getProgramListFromDB(programList);
-				programList.innerHTML = '<h3>Mes programmes locaux <h3><i style="font-size: 9pt;">(Ceci ne sont plus disponibles en cas de déconnexion)<br>Un conseil: Gardez cette même/premiere instance de fenetre pour preserver votre activité</i><marquee style="font-size: 9pt;">Veuillez noter que lors du rechargement de la page vous retrouver votre première instance de fenêtre, cela permet de retrouver les programmes associés à celle-la !</marquee>'; // Réinitialiser la liste
-			
+				programList.innerHTML = '<h3>Mes programmes locaux <h3><i style="font-size: 9pt;">(Ceci ne sont plus disponibles en cas de déconnexion)<br>Un conseil: Gardez cette même/premiere instance de fenetre pour preserver votre activité</i><marquee style="font-size: 9pt;">Veuillez noter que lors du rechargement de la page vous retrouver votre première instance de fenêtre, cela permet de retrouver les programmes associés à celle-la !</marquee>'; 
+				// Réinitialiser la liste
 				// Récupérer la liste des programmes depuis le localStorage
 				const programs = JSON.parse(localStorage.getItem(`${numThreads}-programs`) || '[]');
 				
@@ -341,21 +277,10 @@
 				jsEditor.value = program.js; // Charge le code JS dans l'éditeur
 				tabBtns[0].click(); // Basculer vers l'onglet éditeur
 			}
-			
-
 		    // Initialisation
 		    updateProgramList();
-		
 			console.info("PID" + numThreads);
-		
-
 	}
-
-
 	env.addUtility('ProgramManagement', 'PM_editeur', PM_editeur);
-
-
 	console.log("ProgramManagement lancé : pid");
-
-/***/
 }
