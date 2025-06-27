@@ -1,6 +1,20 @@
+    // Constantes
+    const PROTOCOLE = 'http';
+    const DOMAIN    = PROTOCOLE + '://localhost:3000';
+
+    // Minimal Framework Winmanager : todo
+    class WinmanagerBox(){
+        constructor() {
+            this.box = 'Box|';
+            
+        }
+        alert(val){
+            return this.box+val;
+        }
+    }
+
 
     // Sélection des éléments
-    //const userList = document.getElementById('user-list');
     const appsList = document.getElementById('apps-list');
     const logsList = document.getElementById('logs-list');
     const userAppsList = document.getElementById('user-apps-list');
@@ -8,18 +22,12 @@
     const userdataStructure = document.getElementById('userdata-structure');
     const createUserForm = document.getElementById('create-user-form');
     // Fonction pour récupérer et afficher les utilisateurs
-    /*async function loadUsers() {
-        const response = await fetch('http://localhost:3000/_a/administrateur/users');
-        const data = await response.json();
-        //alert(userList);
-        userList.innerHTML = data.map(user => `<li>${user.username} <button onclick="deleteUser(${user.id})">Supprimer</button></li>`).join('');
-    }*/
     const userList = document.getElementById('user-list');
     const deleteSelectedBtn = document.getElementById('delete-selected-btn');
 
     // Fonction pour récupérer et afficher les utilisateurs avec cases à cocher
     async function loadUsers() {
-        const response = await fetch('http://localhost:3000/_a/administrateur/users');
+        const response = await fetch(DOMAIN+'/_a/administrateur/users');
         const data = await response.json();
 
         userList.innerHTML = data.map((user)=>{
@@ -33,13 +41,8 @@
     }
 
     // Fonction pour récupérer et afficher les applications
-    /*async function loadApps() {
-        const response = await fetch('http://localhost:3000/_a/administrateur/apps');
-        const data = await response.json();
-        appsList.innerHTML = data.map(app => `<li>${app.name}</li>`).join('');
-    }*/
     async function loadApps() {
-        const response = await fetch('http://localhost:3000/_a/administrateur/apps');
+        const response = await fetch(DOMAIN+'/_a/administrateur/apps');
         const data = await response.json();
         const appsList = document.getElementById('apps-list');
         appsList.innerHTML = ''; // Réinitialiser la liste des applications
@@ -76,28 +79,28 @@
 
     // Fonction pour récupérer et afficher les logs
     async function loadLogs() {
-        const response = await fetch('http://localhost:3000/_a/administrateur/logs');
+        const response = await fetch(DOMAIN+'/_a/administrateur/logs');
         const data = await response.json();
         logsList.innerHTML = data.map(log => `<li>${log.message}</li>`).join('');
     }
 
     // Fonction pour récupérer et afficher les applications installées
     async function loadUserApps() {
-        const response = await fetch('http://localhost:3000/_a/administrateur/user_installed_apps');
+        const response = await fetch(DOMAIN+'/_a/administrateur/user_installed_apps');
         const data = await response.json();
         userAppsList.innerHTML = data.map(app => `<li>${app.app_id}</li>`).join('');
     }
 
     // Fonction pour récupérer et afficher les fenêtres ouvertes
     async function loadOpenWindows() {
-        const response = await fetch('http://localhost:3000/_a/administrateur/open_windows');
+        const response = await fetch(DOMAIN+'/_a/administrateur/open_windows');
         const data = await response.json();
         openWindowsList.innerHTML = data.map(window => `<li>${window.title}</li>`).join('');
     }
 
     // Fonction pour récupérer et afficher la structure de USERDATA
     async function loadUserDataStructure() {
-        const response = await fetch('http://localhost:3000/_a/administrateur/userdata/justview');
+        const response = await fetch(DOMAIN+'/_a/administrateur/userdata/justview');
         const data = await response.json();
         userdataStructure.textContent = JSON.stringify(data, null, 2);
     }
@@ -109,7 +112,7 @@
             //    return; // Annuler la suppression si l'utilisateur ne confirme pas
             //}
     
-            const response = await fetch(`http://localhost:3000/_a/administrateur/users/delete`, {
+            const response = await fetch(`${DOMAINE}/_a/administrateur/users/delete`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -121,7 +124,7 @@
                 throw new Error('Erreur lors de la suppression de l\'utilisateur.');
             }
     
-            //alert('Utilisateur supprimé avec succès.');
+            //WinmanagerBox.alert('Utilisateur supprimé avec succès.');
             // Rafraîchir la liste des utilisateurs
             loadUsers();
         } catch (error) {
@@ -167,7 +170,7 @@
 
     async function createUser(username, email, password) {
         try {
-            const response = await fetch('http://localhost:3000/users/register', {
+            const response = await fetch(DOMAIN+'/users/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
