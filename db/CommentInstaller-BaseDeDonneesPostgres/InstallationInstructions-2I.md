@@ -20,7 +20,7 @@ Houssam BACAR
 docker pull postgres
 
 # Запуск контейнера PostgreSQL
-docker run --name my-postgres -e POSTGRES_PASSWORD=SimpleASWater456 -p 5432:5432 -d postgres
+docker run --name my-postgres -e POSTGRES_PASSWORD=perfectpassword -p 5432:5432 -d postgres
 ```
 Эта команда создает контейнер с именем "my-postgres", устанавливает пароль, привязывает порт 5432 и запускает контейнер в фоновом режиме[1][2].
 
