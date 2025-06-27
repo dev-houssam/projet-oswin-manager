@@ -9,7 +9,7 @@ const pool = new Pool({
   user:  "postgres",
   host:  "localhost",
   database: "winmanager",
-  password: "SimpleASWater456",
+  password: "perfectpassword",
   port: 5432,
   ssl: process.env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false, // SSL si en production
 });
